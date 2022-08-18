@@ -24,9 +24,7 @@
         //属性或方法是否空行
 //        [YBMFConfig shareConfig].fileHHandler.ybmf_skipLine = YES;
 //        [YBMFConfig shareConfig].fileMHandler.ybmf_skipLine = YES;
-        //是否需要实现 NSCoding 或 NSCopying 协议
-//        [YBMFConfig shareConfig].needCoding = NO;
-//        [YBMFConfig shareConfig].needCopying = NO;
+        
         //设置类名公用后缀
 //        [YBMFConfig shareConfig].fileSuffix = @"File";
         //设置忽略类型
@@ -41,6 +39,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //是否需要实现 NSCoding 或 NSCopying 协议
+    [YBMFConfig shareConfig].needCoding = NO;
+    [YBMFConfig shareConfig].needCopying = NO;
+    
+    //设置工程用的字典转模型框架
+    [YBMFConfig shareConfig].framework = YBMFFrameworkYY;
     
     //解析微博的json
     [YBModelFile createFileWithName:@"WBTrends" data:@"weibo_0"];
