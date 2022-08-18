@@ -63,7 +63,7 @@ static NSSet<NSString *> *YBPropertyReservedWord(void) {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         set = [NSSet setWithObjects:
-               @"if", @"else", @"switch", @"case", @"do", @"while", @"return", @"break",
+               @"id",@"if", @"else", @"switch", @"case", @"do", @"while", @"return", @"break",
                @"true", @"false", @"YES", @"NO",
                @"char", @"short", @"int", @"long", @"double", @"float",
                @"struct", @"static", nil];
