@@ -29,16 +29,14 @@
 //        [YBMFConfig shareConfig].fileSuffix = @"File";
         //设置忽略类型
 //        [YBMFConfig shareConfig].ignoreType = YBMFIgnoreTypeAllDigital | YBMFIgnoreTypeMutable;
-        //设置文件划分策略
-//        [YBMFConfig shareConfig].filePartitionMode = YBMFFilePartitionModeApart;
-        //设置工程用的字典转模型框架
-//        [YBMFConfig shareConfig].framework = YBMFFrameworkMJ;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //设置文件划分策略
+    [YBMFConfig shareConfig].filePartitionMode = YBMFFilePartitionModeApart;
     
     //是否需要实现 NSCoding 或 NSCopying 协议
     [YBMFConfig shareConfig].needCoding = NO;
@@ -47,8 +45,11 @@
     //设置工程用的字典转模型框架
     [YBMFConfig shareConfig].framework = YBMFFrameworkYY;
     
+    // 设置模型基类
+    [YBMFConfig shareConfig].baseClass = NSClassFromString(@"JMObject");
+    
     //解析微博的json
-    [YBModelFile createFileWithName:@"WBTrends" data:@"weibo_0"];
+    [YBModelFile createFileWithName:@"JMTest" data:@"test"];
     
     
     //解析微博的json （带独有配置）

@@ -25,6 +25,8 @@
 		23EB9F2D223F7D3900EE40FE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EB9F2C223F7D3900EE40FE /* main.m */; };
 		23EB9F36223F7DC500EE40FE /* YBModelFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EB9F35223F7DC500EE40FE /* YBModelFile.m */; };
 		2C4581067DFB62CE02313E66 /* Pods_YBModelFileDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6073E7F20FCB17881827D901 /* Pods_YBModelFileDemo.framework */; };
+		88D69EDA28AE204000680BC4 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 88D69ED928AE204000680BC4 /* test.json */; };
+		88D69EDD28AE254100680BC4 /* JMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D69EDC28AE254100680BC4 /* JMObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,9 @@
 		23EB9F34223F7DC500EE40FE /* YBModelFile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YBModelFile.h; sourceTree = "<group>"; };
 		23EB9F35223F7DC500EE40FE /* YBModelFile.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YBModelFile.m; sourceTree = "<group>"; };
 		6073E7F20FCB17881827D901 /* Pods_YBModelFileDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YBModelFileDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88D69ED928AE204000680BC4 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
+		88D69EDB28AE254100680BC4 /* JMObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMObject.h; sourceTree = "<group>"; };
+		88D69EDC28AE254100680BC4 /* JMObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMObject.m; sourceTree = "<group>"; };
 		EA5DD98DF919720D45DE16D7 /* Pods-YBModelFileDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YBModelFileDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YBModelFileDemo/Pods-YBModelFileDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +147,7 @@
 		23EB9F1C223F7D3800EE40FE /* YBModelFileDemo */ = {
 			isa = PBXGroup;
 			children = (
+				88D69ED928AE204000680BC4 /* test.json */,
 				231F7691224298A2005A59CB /* weibo_0.json */,
 				23EB9F33223F7DBC00EE40FE /* YBModelFile */,
 				23EB9F1D223F7D3800EE40FE /* AppDelegate.h */,
@@ -155,6 +161,8 @@
 				23EB9F28223F7D3900EE40FE /* LaunchScreen.storyboard */,
 				23EB9F2B223F7D3900EE40FE /* Info.plist */,
 				23EB9F2C223F7D3900EE40FE /* main.m */,
+				88D69EDB28AE254100680BC4 /* JMObject.h */,
+				88D69EDC28AE254100680BC4 /* JMObject.m */,
 			);
 			path = YBModelFileDemo;
 			sourceTree = "<group>";
@@ -251,6 +259,7 @@
 			files = (
 				231F7692224298A2005A59CB /* weibo_0.json in Resources */,
 				23EB9F2A223F7D3900EE40FE /* LaunchScreen.storyboard in Resources */,
+				88D69EDA28AE204000680BC4 /* test.json in Resources */,
 				23EB9F27223F7D3900EE40FE /* Assets.xcassets in Resources */,
 				23EB9F25223F7D3800EE40FE /* Main.storyboard in Resources */,
 			);
@@ -307,6 +316,7 @@
 				23EB9F36223F7DC500EE40FE /* YBModelFile.m in Sources */,
 				23AB8ADC223FD8F800C5849D /* YBMFNode.m in Sources */,
 				230CAA71224119A000633F37 /* YBMFFileNoteHandler.m in Sources */,
+				88D69EDD28AE254100680BC4 /* JMObject.m in Sources */,
 				230CAA6D2240F56800633F37 /* YBMFConfig.m in Sources */,
 				23EB9F22223F7D3800EE40FE /* ViewController.m in Sources */,
 				23EB9F2D223F7D3900EE40FE /* main.m in Sources */,
