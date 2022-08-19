@@ -20,8 +20,8 @@
     self = [super init];
     if (self) {
         self.ybmf_executableName = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleExecutableKey];
-        self.ybmf_developer = @"indulgeIn";
-        self.ybmf_organization = @"indulgeIn";
+        self.ybmf_developer = @"Albz";
+        self.ybmf_organization = @"JiemianNews";
     }
     return self;
 }
@@ -41,8 +41,20 @@
     [format1 setDateFormat:@"yyyy"];
     NSString *dateYearStr = [format1 stringFromDate:date];
     
+    NSString *fileTypeStr = @"";
+    switch (fileType) {
+        case YBMFFileNoteTypeH:
+            fileTypeStr = @".h";
+            break;
+        case YBMFFileNoteTypeM:
+            fileTypeStr = @".m";
+            break;
+        case YBMFFileNoteTypeSwift:
+            fileTypeStr = @".swift";
+            break;
+    }
     [fileNote appendString:@"//\n"];
-    [fileNote appendString:[NSString stringWithFormat:@"//  %@%@\n", fileName, fileType == YBMFFileNoteTypeH ? @".h" : @".m"]];
+    [fileNote appendString:[NSString stringWithFormat:@"//  %@%@\n", fileName, fileTypeStr]];
     [fileNote appendString:[NSString stringWithFormat:@"//  %@\n", self.ybmf_executableName]];
     [fileNote appendString:@"//\n"];
     [fileNote appendString:[NSString stringWithFormat:@"//  Created by %@ on %@.\n", self.ybmf_developer, dateStr]];

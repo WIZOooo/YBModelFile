@@ -36,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //设置文件划分策略
-    [YBMFConfig shareConfig].filePartitionMode = YBMFFilePartitionModeTogether;
+    [YBMFConfig shareConfig].filePartitionMode = YBMFFilePartitionModeApart;
     
     [YBMFConfig shareConfig].language = YBMFFrameworkSwift;
     

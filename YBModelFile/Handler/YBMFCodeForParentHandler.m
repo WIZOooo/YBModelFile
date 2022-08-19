@@ -69,7 +69,7 @@
         case YBMFNodeTypeNSArray: {
             YBMFNode *child = node.children[YBMFNodeArrayElementKey];
             if (child && child.className && child.className.length > 0) {
-                return [NSString stringWithFormat:@"var %@ : [%@]?",propertyName, node.className];
+                return [NSString stringWithFormat:@"var %@ : [%@]?",propertyName, child.className];
             } else {
                 return [NSString stringWithFormat:@"var %@ : []?",propertyName];
             }

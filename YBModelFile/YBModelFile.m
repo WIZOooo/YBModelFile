@@ -228,16 +228,17 @@ fail:
 }
 
 - (void)createSwiftCodeTogether:(NSString *)path {
+    YBMFNode *node = self.rootNode;
     NSMutableString *allInfoInFileSwift = [NSMutableString string];
-    
+        
     NSMutableString *codeInFileSwift = [NSMutableString string];
-    [self dfs_codeInFileSwift:codeInFileSwift node:self.rootNode];
-    
-    [allInfoInFileSwift appendString:[self.config.fileNoteHander ybmf_fileNoteWithFileName:self.rootNode.className fileType:YBMFFileNoteTypeH]];
+    [self dfs_codeInFileSwift:codeInFileSwift node:node];
+    [allInfoInFileSwift appendString:[self.config.fileNoteHander ybmf_fileNoteWithFileName:node.className fileType:YBMFFileNoteTypeSwift]];
+    [allInfoInFileSwift appendString:@"import Foundation\n"];
     [allInfoInFileSwift appendString:@"\n"];
     [allInfoInFileSwift appendString:codeInFileSwift];
     
-    [self creatFileWithPath:path fileName:[NSString stringWithFormat:@"%@.swift", self.rootNode.className] fileCode:codeInFileSwift];
+    [self creatFileWithPath:path fileName:[NSString stringWithFormat:@"%@.swift", self.rootNode.className] fileCode:[allInfoInFileSwift copy]];
 }
 
 - (void)creatFilesWithDirectoryPath:(NSString *)path {
@@ -269,8 +270,14 @@ fail:
             }
         }
     }];
-    [self creatFileWithPath:path fileName:[NSString stringWithFormat:@"%@.h", node.className] fileCode:[self allInfoFileH:node]];
-    [self creatFileWithPath:path fileName:[NSString stringWithFormat:@"%@.m", node.className] fileCode:[self allInfoFileM:node]];
+    
+    if (self.config.language == YBMFFrameworkObjc) {
+        [self creatFileWithPath:path fileName:[NSString stringWithFormat:@"%@.h", node.className] fileCode:[self allInfoFileH:node]];
+        [self creatFileWithPath:path fileName:[NSString stringWithFormat:@"%@.m", node.className] fileCode:[self allInfoFileM:node]];
+    }
+    else {
+        [self creatFileWithPath:path fileName:[NSString stringWithFormat:@"%@.swift", node.className] fileCode:[self allInfoFileSwift:node]];
+    }
 }
 
 - (void)dfs_mergeWithCodeInFileH:(NSMutableString *)codeInFileH codeInFileM:(NSMutableString *)codeInFileM node:(YBMFNode *)node {
@@ -290,6 +297,7 @@ fail:
     [codeInFileM appendString:@"\n\n"];
 }
 
+// 将生成该节点及以下节点的全部代码
 - (void)dfs_codeInFileSwift:(NSMutableString *)codeInFileSwift node:(YBMFNode *)node {
     [node.children enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, YBMFNode * _Nonnull obj, BOOL * _Nonnull stop) {
         if (obj.type == YBMFNodeTypeClass) {
@@ -326,5 +334,16 @@ fail:
     NSString *allInfoFileM = [NSString stringWithFormat:@"%@\n%@\n%@", noteInFileM, importInfoInFileM, codeInfoInFileM];
     return allInfoFileM;
 }
+
+
+- (NSString *)allInfoFileSwift:(YBMFNode *)node {
+    NSMutableString *allInfoInFileSwift = [NSMutableString string];
+    [allInfoInFileSwift appendString:[self.config.fileNoteHander ybmf_fileNoteWithFileName:node.className fileType:YBMFFileNoteTypeSwift]];
+    [allInfoInFileSwift appendString:@"import Foundation\n"];
+    [allInfoInFileSwift appendString:@"\n"];
+    [allInfoInFileSwift appendString:[self.config.fileSwiftHandler ybmf_codeInfoWithNode:node]];
+    return [allInfoInFileSwift copy];
+}
+
 
 @end

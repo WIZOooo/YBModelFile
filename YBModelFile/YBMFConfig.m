@@ -39,7 +39,7 @@
     if (self) {
         _fileSuffix = @"Model";
         _filePartitionMode = YBMFFilePartitionModeTogether;
-        _ignoreType = YBMFIgnoreTypeAllDigital | YBMFIgnoreTypeMutable;
+        _ignoreType = YBMFIgnoreTypeMutable;
         _baseClass = NSObject.self;
         _framework = YBMFFrameworkYY;
         _language = YBMFFrameworkObjc;

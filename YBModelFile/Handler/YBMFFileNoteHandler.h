@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, YBMFFileNoteType) {
     YBMFFileNoteTypeH,  //.h文件
-    YBMFFileNoteTypeM   //.m文件
+    YBMFFileNoteTypeM,   //.m文件
+    YBMFFileNoteTypeSwift   //.swift文件
 };
 
 @protocol YBMFFileNoteHandler <NSObject>
