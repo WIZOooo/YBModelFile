@@ -49,4 +49,34 @@
     }
 }
 
+- (NSString *)ybmf_swiftCodeForParentWithNode:(YBMFNode *)node propertyName:(NSString *)propertyName {
+    switch (node.type) {
+        case YBMFNodeTypeBOOL:
+            return [NSString stringWithFormat:@"var %@ : Bool = false",propertyName];
+        case YBMFNodeTypeNSInteger:
+            return [NSString stringWithFormat:@"var %@ : Int?",propertyName];
+        case YBMFNodeTypeDouble:
+            return [NSString stringWithFormat:@"var %@ : Double?",propertyName];
+        case YBMFNodeTypeNSNumber:
+            return [NSString stringWithFormat:@"var %@ : NSNumber?",propertyName];
+        case YBMFNodeTypeNSMutableString:
+            return [NSString stringWithFormat:@"var %@ : String?",propertyName];
+        case YBMFNodeTypeNSString:
+            return [NSString stringWithFormat:@"var %@ : String?",propertyName];
+        case YBMFNodeTypeClass:
+            return [NSString stringWithFormat:@"var %@ : %@?",propertyName, node.className];
+        case YBMFNodeTypeNSMutableArray:
+        case YBMFNodeTypeNSArray: {
+            YBMFNode *child = node.children[YBMFNodeArrayElementKey];
+            if (child && child.className && child.className.length > 0) {
+                return [NSString stringWithFormat:@"var %@ : [%@]?",propertyName, node.className];
+            } else {
+                return [NSString stringWithFormat:@"var %@ : []?",propertyName];
+            }
+        }
+        default:
+            return @"";
+    }
+}
+
 @end

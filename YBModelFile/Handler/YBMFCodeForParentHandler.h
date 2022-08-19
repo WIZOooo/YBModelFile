@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol YBMFCodeForParentHandler <NSObject>
 
 - (NSString *)ybmf_codeForParentWithNode:(YBMFNode *)node;
+- (NSString *)ybmf_swiftCodeForParentWithNode:(YBMFNode *)node propertyName:(NSString *)propertyName;
 
 @end
 

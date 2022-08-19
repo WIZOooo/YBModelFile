@@ -11,6 +11,7 @@
 #import "YBMFFileNoteHandler.h"
 #import "YBMFFileHHandler.h"
 #import "YBMFFileMHandler.h"
+#import "YBMSwiftHandler.h"
 #import "YBMFCodeForParentHandler.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -24,6 +25,12 @@ typedef NS_OPTIONS(NSUInteger, YBMFIgnoreType) {
     YBMFIgnoreTypeAllDigital = YBMFIgnoreTypeDouble | YBMFIgnoreTypeNSInteger | YBMFIgnoreTypeBOOL | YBMFIgnoreTypeNSNumber,
     YBMFIgnoreTypeMutable    = 1 << 4   //过滤掉可变类型
 };
+
+typedef NS_ENUM(NSInteger, YBMFLanguage) {
+    YBMFFrameworkObjc,     //Objective-C
+    YBMFFrameworkSwift,     //Swift
+};
+
 
 typedef NS_ENUM(NSInteger, YBMFFramework) {
     YBMFFrameworkYY,     //YYModel
@@ -58,6 +65,9 @@ typedef NS_ENUM(NSInteger, YBMFFilePartitionMode) {
 /** 文件分割模式 (默认为 YBMFFilePartitionModeApart) */
 @property (nonatomic, assign) YBMFFilePartitionMode filePartitionMode;
 
+/** 文件的语言类型，默认是Objc */
+@property (nonatomic, assign) YBMFLanguage language;
+
 /** 类属性忽略的类型（内部自动用更通用类型替代, 默认为 YBMFIgnoreTypeMutable） */
 @property (nonatomic, assign) YBMFIgnoreType ignoreType;
 
@@ -84,6 +94,9 @@ typedef NS_ENUM(NSInteger, YBMFFilePartitionMode) {
 
 /** .m文件代码处理器 */
 @property (nonatomic, strong) id<YBMFFileMHandler> fileMHandler;
+
+/** .m文件代码处理器 */
+@property (nonatomic, strong) id<YBMSwiftHandler> fileSwiftHandler;
 
 /** 节点作为父节点的属性时 Code 格式处理器 */
 @property (nonatomic, strong) id<YBMFCodeForParentHandler> codeForParentHandler;

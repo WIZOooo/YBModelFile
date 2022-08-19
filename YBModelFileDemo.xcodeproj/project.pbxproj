@@ -27,6 +27,7 @@
 		2C4581067DFB62CE02313E66 /* Pods_YBModelFileDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6073E7F20FCB17881827D901 /* Pods_YBModelFileDemo.framework */; };
 		88D69EDA28AE204000680BC4 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 88D69ED928AE204000680BC4 /* test.json */; };
 		88D69EDD28AE254100680BC4 /* JMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D69EDC28AE254100680BC4 /* JMObject.m */; };
+		88D69EE028AE43AF00680BC4 /* YBMSwiftHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D69EDF28AE43AF00680BC4 /* YBMSwiftHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,8 @@
 		88D69ED928AE204000680BC4 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		88D69EDB28AE254100680BC4 /* JMObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMObject.h; sourceTree = "<group>"; };
 		88D69EDC28AE254100680BC4 /* JMObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMObject.m; sourceTree = "<group>"; };
+		88D69EDE28AE43AF00680BC4 /* YBMSwiftHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YBMSwiftHandler.h; sourceTree = "<group>"; };
+		88D69EDF28AE43AF00680BC4 /* YBMSwiftHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YBMSwiftHandler.m; sourceTree = "<group>"; };
 		EA5DD98DF919720D45DE16D7 /* Pods-YBModelFileDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YBModelFileDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-YBModelFileDemo/Pods-YBModelFileDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,6 +98,8 @@
 				231F752F2241D30B005A59CB /* YBMFFileMHandler.m */,
 				231F75312241E130005A59CB /* YBMFCodeForParentHandler.h */,
 				231F75322241E130005A59CB /* YBMFCodeForParentHandler.m */,
+				88D69EDE28AE43AF00680BC4 /* YBMSwiftHandler.h */,
+				88D69EDF28AE43AF00680BC4 /* YBMSwiftHandler.m */,
 			);
 			path = Handler;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 				230CAA6D2240F56800633F37 /* YBMFConfig.m in Sources */,
 				23EB9F22223F7D3800EE40FE /* ViewController.m in Sources */,
 				23EB9F2D223F7D3900EE40FE /* main.m in Sources */,
+				88D69EE028AE43AF00680BC4 /* YBMSwiftHandler.m in Sources */,
 				23949BD22271B74C00A65340 /* NSObject+YBMFConfig.m in Sources */,
 				23949BDE2271C23300A65340 /* WBTrendsModel.m in Sources */,
 				231F75302241D30B005A59CB /* YBMFFileMHandler.m in Sources */,

@@ -42,6 +42,7 @@
         _ignoreType = YBMFIgnoreTypeAllDigital | YBMFIgnoreTypeMutable;
         _baseClass = NSObject.self;
         _framework = YBMFFrameworkYY;
+        _language = YBMFFrameworkObjc;
         _needCopying = YES;
         _needCoding = YES;
         _nameHander = [YBMFNameHandler new];
@@ -54,6 +55,10 @@
         YBMFFileMHandler *fileM = [YBMFFileMHandler new];
         fileM.ybmf_config = self;
         _fileMHandler = fileM;
+        
+        YBMSwiftHandler *fileSwift = [YBMSwiftHandler new];
+        fileSwift.ybmf_config = self;
+        _fileSwiftHandler = fileSwift;
         
         _codeForParentHandler = [YBMFCodeForParentHandler new];
     }

@@ -201,36 +201,57 @@ fail:
     }
 }
 
+- (void)createOCCodeTogether:(NSString *)path {
+    NSMutableString *allInfoInFileH = [NSMutableString string];
+    NSMutableString *allInfoInFileM = [NSMutableString string];
+    
+    NSMutableString *codeInFileH = [NSMutableString string];
+    NSMutableString *codeInFileM = [NSMutableString string];
+    [self dfs_mergeWithCodeInFileH:codeInFileH codeInFileM:codeInFileM node:self.rootNode];
+    
+    [allInfoInFileH appendString:[self.config.fileNoteHander ybmf_fileNoteWithFileName:self.rootNode.className fileType:YBMFFileNoteTypeH]];
+    [allInfoInFileH appendString:@"\n"];
+    [allInfoInFileH appendString:[self.config.fileHHandler ybmf_importInfoWithNode:self.rootNode withoutProperty:YES]];
+    [allInfoInFileH appendString:@"\n"];
+    [allInfoInFileH appendString:@"NS_ASSUME_NONNULL_BEGIN\n\n\n"];
+    [allInfoInFileH appendString:codeInFileH];
+    [allInfoInFileH appendString:@"NS_ASSUME_NONNULL_END\n"];
+    
+    [allInfoInFileM appendString:[self.config.fileNoteHander ybmf_fileNoteWithFileName:self.rootNode.className fileType:YBMFFileNoteTypeM]];
+    [allInfoInFileM appendString:@"\n"];
+    [allInfoInFileM appendString:[self.config.fileMHandler ybmf_importInfoWithNode:self.rootNode]];
+    [allInfoInFileM appendString:@"\n\n"];
+    [allInfoInFileM appendString:codeInFileM];
+    
+    [self creatFileWithPath:path fileName:[NSString stringWithFormat:@"%@.h", self.rootNode.className] fileCode:allInfoInFileH];
+    [self creatFileWithPath:path fileName:[NSString stringWithFormat:@"%@.m", self.rootNode.className] fileCode:allInfoInFileM];
+}
+
+- (void)createSwiftCodeTogether:(NSString *)path {
+    NSMutableString *allInfoInFileSwift = [NSMutableString string];
+    
+    NSMutableString *codeInFileSwift = [NSMutableString string];
+    [self dfs_codeInFileSwift:codeInFileSwift node:self.rootNode];
+    
+    [allInfoInFileSwift appendString:[self.config.fileNoteHander ybmf_fileNoteWithFileName:self.rootNode.className fileType:YBMFFileNoteTypeH]];
+    [allInfoInFileSwift appendString:@"\n"];
+    [allInfoInFileSwift appendString:codeInFileSwift];
+    
+    [self creatFileWithPath:path fileName:[NSString stringWithFormat:@"%@.swift", self.rootNode.className] fileCode:codeInFileSwift];
+}
+
 - (void)creatFilesWithDirectoryPath:(NSString *)path {
     switch (self.config.filePartitionMode) {
         case YBMFFilePartitionModeApart:
             [self dfs_creatFilesWithDirectoryPath:path node:self.rootNode];
             break;
         case YBMFFilePartitionModeTogether: {
-            
-            NSMutableString *allInfoInFileH = [NSMutableString string];
-            NSMutableString *allInfoInFileM = [NSMutableString string];
-            
-            NSMutableString *codeInFileH = [NSMutableString string];
-            NSMutableString *codeInFileM = [NSMutableString string];
-            [self dfs_mergeWithCodeInFileH:codeInFileH codeInFileM:codeInFileM node:self.rootNode];
-            
-            [allInfoInFileH appendString:[self.config.fileNoteHander ybmf_fileNoteWithFileName:self.rootNode.className fileType:YBMFFileNoteTypeH]];
-            [allInfoInFileH appendString:@"\n"];
-            [allInfoInFileH appendString:[self.config.fileHHandler ybmf_importInfoWithNode:self.rootNode withoutProperty:YES]];
-            [allInfoInFileH appendString:@"\n"];
-            [allInfoInFileH appendString:@"NS_ASSUME_NONNULL_BEGIN\n\n\n"];
-            [allInfoInFileH appendString:codeInFileH];
-            [allInfoInFileH appendString:@"NS_ASSUME_NONNULL_END\n"];
-            
-            [allInfoInFileM appendString:[self.config.fileNoteHander ybmf_fileNoteWithFileName:self.rootNode.className fileType:YBMFFileNoteTypeM]];
-            [allInfoInFileM appendString:@"\n"];
-            [allInfoInFileM appendString:[self.config.fileMHandler ybmf_importInfoWithNode:self.rootNode]];
-            [allInfoInFileM appendString:@"\n\n"];
-            [allInfoInFileM appendString:codeInFileM];
-            
-            [self creatFileWithPath:path fileName:[NSString stringWithFormat:@"%@.h", self.rootNode.className] fileCode:allInfoInFileH];
-            [self creatFileWithPath:path fileName:[NSString stringWithFormat:@"%@.m", self.rootNode.className] fileCode:allInfoInFileM];
+            if (self.config.language == YBMFFrameworkObjc) {
+                [self createOCCodeTogether:path];
+            }
+            else {
+                [self createSwiftCodeTogether:path];
+            }
         }
         default:
             break;
@@ -267,6 +288,21 @@ fail:
     [codeInFileH appendString:@"\n\n"];
     [codeInFileM appendString:[self.config.fileMHandler ybmf_codeInfoWithNode:node]];
     [codeInFileM appendString:@"\n\n"];
+}
+
+- (void)dfs_codeInFileSwift:(NSMutableString *)codeInFileSwift node:(YBMFNode *)node {
+    [node.children enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, YBMFNode * _Nonnull obj, BOOL * _Nonnull stop) {
+        if (obj.type == YBMFNodeTypeClass) {
+            [self dfs_codeInFileSwift:codeInFileSwift node:obj];
+        } else if (obj.type == YBMFNodeTypeNSArray || obj.type == YBMFNodeTypeNSMutableArray) {
+            YBMFNode *child = obj.children[YBMFNodeArrayElementKey];
+            if (child && child.type == YBMFNodeTypeClass) {
+                [self dfs_codeInFileSwift:codeInFileSwift node:child];
+            }
+        }
+    }];
+    [codeInFileSwift appendString:[self.config.fileSwiftHandler ybmf_codeInfoWithNode:node]];
+    [codeInFileSwift appendString:@"\n\n"];
 }
 
 #pragma mark - tool
